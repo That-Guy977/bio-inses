@@ -11,7 +11,7 @@ import subprocess
 
 MAX_ATTEMPTS = 5
 
-OUT_DIR = f"runs/{Entity.dt}"
+OUT_DIR = f"simulation/runs/{Entity.dt}"
 
 window_id = None
 

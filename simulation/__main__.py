@@ -7,9 +7,11 @@ from util import name, size, tlimit
 from capture import save
 from weather import geocode
 from typing import Sequence
-import random
+import os, random
 
 def main(seed: int = None):
+  os.makedirs("simulation/logs", exist_ok=True)
+  os.makedirs(f"simulation/runs/{Entity.dt}", exist_ok=True)
   screen, (entities, pests, preds, traps) = init(seed)
   while True:
     tick(screen, entities)
