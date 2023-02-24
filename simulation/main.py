@@ -40,12 +40,11 @@ def init(seed: int = None, outdir = out_dir):
   Trap.bind(pests, preds, entities)
   return screen, (entities, pests, preds, traps), seed
 
-def tick(screen: Surface, entities: Group, cb = lambda: None):
+def tick(screen: Surface, entities: Group, cb = lambda: print()):
   Entity.next_tick()
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       Entity.log("MAIN", "quit")
-      print()
       pygame.quit()
       cb()
       exit()
@@ -54,8 +53,8 @@ def tick(screen: Surface, entities: Group, cb = lambda: None):
   entities.draw(screen)
   display.update()
 
-def check_end(pests: Sequence[Pest], preds: Sequence[Pred], traps: Sequence[Trap]):
-  if Entity.tick >= tlimit:
+def check_end(pests: Sequence[Pest], preds: Sequence[Pred], traps: Sequence[Trap], tlim = tlimit):
+  if Entity.tick >= tlim:
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     Entity.log("MAIN", "time")
     Entity.log("MAIN", "gsz", len(pests), len(preds))
