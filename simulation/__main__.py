@@ -9,6 +9,8 @@ from weather import geocode
 from typing import Sequence
 import os, random
 
+__all__ = ["main", "init", "tick", "check_end", "dead"]
+
 def main(seed: int = None):
   os.makedirs("simulation/logs", exist_ok=True)
   os.makedirs(f"simulation/runs/{Entity.dt}", exist_ok=True)
