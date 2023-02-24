@@ -37,5 +37,5 @@ def find_window():
 
 def set_outdir(outdir: str):
   global out_dir
-  out_dir = outdir
-  os.makedirs(f"{out_dir}/{Entity.dt}", exist_ok=True)
+  out_dir = f"{outdir}/{Entity.dt}"
+  os.makedirs(out_dir, exist_ok=True)
