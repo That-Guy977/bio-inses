@@ -7,24 +7,25 @@ from Quartz import \
   kCGWindowNumber as WINDOW_NUMBER, \
   kCGWindowName as WINDOW_NAME, \
   kCGWindowOwnerName as WINDOW_OWNER_NAME
-import subprocess
+import os, subprocess
 
 MAX_ATTEMPTS = 5
 
 window_id = None
+out_dir = None
 
-def save(out_dir: str) -> None:
+def save():
   if window_id is None:
     find_window()
-  outfile = f"{out_dir}/{Entity.tick:04}.png"
+  out_file = f"{out_dir}/{Entity.tick:04}.png"
   for _ in range(MAX_ATTEMPTS):
-    res = subprocess.run(["screencapture", "-l", f"{window_id}", outfile], stderr=subprocess.DEVNULL)
+    res = subprocess.run(["screencapture", "-l", f"{window_id}", out_file], stderr=subprocess.DEVNULL)
     if res.returncode == 0:
       break
   else:
-    subprocess.run(["cp", f"{out_dir}/{Entity.tick - 1:04}.png", outfile], stderr=subprocess.DEVNULL)
+    subprocess.run(["cp", f"{out_dir}/{Entity.tick - 1:04}.png", out_file], stderr=subprocess.DEVNULL)
 
-def find_window() -> None:
+def find_window():
   windows = COPY_WINDOW_INFO(OPTION_ALL, NULL_WINDOW_ID)
   for window in windows:
     if WINDOW_NAME in window and window[WINDOW_NAME] == name \
@@ -33,3 +34,8 @@ def find_window() -> None:
         window_id = window[WINDOW_NUMBER]
         return
   raise LookupError("Window not found")
+
+def set_outdir(outdir: str):
+  global out_dir
+  out_dir = outdir
+  os.makedirs(f"{out_dir}/{Entity.dt}", exist_ok=True)

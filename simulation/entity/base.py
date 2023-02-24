@@ -2,8 +2,9 @@ from __future__ import annotations
 from pygame import Surface, Rect
 from pygame.sprite import Sprite
 from .params import Params
-from ..util import Point, size, logs_dir
+from ..util import Point, size
 from datetime import datetime
+import os
 
 class Entity(Sprite):
   def __init__(self, params: Params, pos: Point, color: int):
@@ -46,12 +47,11 @@ class Entity(Sprite):
     cls.ln = True
 
   @classmethod
-  def reset(cls, logs_loc = logs_dir) -> None:
+  def reset(cls, outdir: str) -> None:
     cls.tick = -1
     cls.count = 0
     cls.entities: dict[int, Entity] = {}
+    os.makedirs(f"{outdir}", exist_ok=True)
     cls.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
-    cls.file = open(f"{logs_loc}/{cls.dt}.bioinses", "w", 1)
+    cls.file = open(f"{outdir}/{cls.dt}.bioinses", "w", 1)
     cls.ln = True
-
-Entity.reset()
