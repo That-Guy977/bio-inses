@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <nav class="flex">
+    <a class="navbutton flex" href="{% url 'detect' %}">Detect Insects</a>
+    <a class="navbutton flex" href="{% url 'simulation' %}">Simulation</a>
+  </nav>
+{% endblock %}
+
+{% block style %}
+  <style>
+    a.navbutton {
+      width: 150px;
+      height: 80px;
+      border-width: medium;
+      font-size: 16px;
+    }
+
+    nav.flex {
+      gap: 20px;
+    }
+  </style>
+{% endblock %}

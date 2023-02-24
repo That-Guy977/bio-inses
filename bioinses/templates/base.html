@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <title>BIO-INSES</title>
+    <link rel="icon" href="{% static 'logo.png' %}"/>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"/>
+    {% block style %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <a id="home" href="{% url 'home' %}">
+        <img src="{% static 'logo.png' %}" alt="BIO-INSES" height="100"/>
+      </a>
+      <div class="center title">
+        <h1>BIO-INSES</h1>
+        <p id="subtitle">Biological Control</p>
+      </div>
+    </header>
+    <div id="header-dummy"></div>
+    <main id="content" class="center">
+      {% block content %}{% endblock %}
+    </main>
+    {% block script %}{% endblock %}
+  </body>
+</html>

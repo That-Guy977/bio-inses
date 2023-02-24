@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <input type="file" accept="image/*" onchange="update(event);">
+  <button id="submit" disabled onclick="demo()">Submit</button>
+  <img class="loading" width="150" src="{% static 'loading.svg' %}">
+  <div class="flex">
+    <img id="preview" width="500">
+    <div class="center" id="vals"></div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    function update(event) {
+      const submit = document.getElementById("submit");
+      const [file] = event.target.files;
+      if (file) {
+        submit.disabled = false;
+        loading();
+        setTimeout(display, 2000);
+      } else {
+        submit.disabled = true;
+        document.getElementById("preview").textContent = "";
+      }
+    }
+
+    function loading() {
+      const loading = document.querySelector(".loading");
+      loading.style.display = "block";
+    }
+
+    function display() {
+      const preview = document.getElementById("preview");
+      const loading = document.querySelector(".loading");
+      loading.style.display = "none";
+      preview.src = "{% static 'detect.jpg' %}";
+      const vals = document.getElementById("vals");
+      vals.innerHTML = `
+        <h2>พบแมลง 102 ตัว</h2>
+        <h2 style="color: red">พบแมลงไม่ดี 57 ตัว</h2>
+        <h2 style="color: blue">พบแมลงดี 45 ตัว</h2>
+        <button>รายละเอียด</button>
+        <a class="flex" href="{% url 'simulation' %}">Simulation</a>
+      `;
+    }
+  </script>
+{% endblock %}
+
+{% block style %}
+  <style>
+    .result {
+      display: flex;
+    }
+
+    #preview {
+      margin: 10px;
+    }
+  </style>
+{% endblock %}

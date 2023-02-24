@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <button id="start" onclick="start()">Start simulation!</button>
+  <img class="loading" width="150" src="{% static 'loading.svg' %}">
+{% endblock %}
+
+{% block script %}
+  <script>
+    function start() {
+      document.getElementById("start").disabled = true;
+      document.querySelector(".loading").style.display = "block";
+      fetch().then(load)
+    }
+
+    function load() {
+      
+    }
+  </script>
+{% endblock %}
