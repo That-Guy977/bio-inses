@@ -6,16 +6,6 @@ from ..util import Point, size
 from datetime import datetime
 
 class Entity(Sprite):
-  tick = -1
-  count = 0
-  entities: dict[int, Entity] = {}
-  dt = f"{datetime.now():%Y%m%d-%H%M%S}"
-  try:
-    file = open(f"simulation/logs/{dt}.bioinses", "w", 1)
-  except:
-    file = None
-  ln = True
-
   def __init__(self, params: Params, pos: Point, color: int):
     super().__init__()
     self.id = Entity.count
@@ -51,6 +41,20 @@ class Entity(Sprite):
     cls.ln = False
 
   @classmethod
-  def next_tick(cls):
+  def next_tick(cls) -> None:
     cls.tick += 1
     cls.ln = True
+
+  @staticmethod
+  def reset() -> None:
+    Entity.tick = -1
+    Entity.count = 0
+    Entity.entities: dict[int, Entity] = {}
+    Entity.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
+    try:
+      Entity.file = open(f"simulation/logs/{Entity.dt}.bioinses", "w", 1)
+    except:
+      Entity.file = None
+    Entity.ln = True
+
+Entity.reset()
