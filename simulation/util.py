@@ -1,5 +1,4 @@
 from pygame.math import Vector2, clamp
-from .entity import Entity
 from typing import Self
 import math, random
 
@@ -8,8 +7,6 @@ name = "BIO-INSES"
 size = Vector2(500, 500)
 
 tlimit = 1000
-
-capture_dir = f"simulation/runs/{Entity.dt}"
 
 class Point(Vector2):
   def truncate(self) -> Self:

@@ -3,7 +3,7 @@ from pygame import display, Surface
 from pygame.sprite import Group
 from pygame.time import wait
 from .entity import *
-from .util import name, size, tlimit, capture_dir
+from .util import name, size, tlimit
 from .capture import save
 from .weather import geocode
 from typing import Sequence
@@ -12,9 +12,10 @@ import os, random
 __all__ = ["main", "init", "tick", "check_end", "dead"]
 
 def main(seed: int = None):
+  capture_dir = f"simulation/runs/{Entity.dt}"
   os.makedirs("simulation/logs", exist_ok=True)
   os.makedirs(capture_dir, exist_ok=True)
-  screen, (entities, pests, preds, traps) = init(seed)
+  screen, (entities, pests, preds, traps), _ = init(seed)
   while True:
     tick(screen, entities)
     save(capture_dir)
@@ -26,6 +27,7 @@ def init(seed: int = None):
   pygame.init()
   screen = display.set_mode(size)
   display.set_caption(name)
+  if seed is None: seed = random.getrandbits(32)
   random.seed(seed)
   # geocode("chiangmai,th")
   entities: Group = Group()
@@ -36,7 +38,7 @@ def init(seed: int = None):
     preds := Pred.generate(),
   )
   Trap.bind(pests, preds, entities)
-  return screen, (entities, pests, preds, traps)
+  return screen, (entities, pests, preds, traps), seed
 
 def tick(screen: Surface, entities: Group):
   Entity.next_tick()
