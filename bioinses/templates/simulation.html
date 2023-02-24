@@ -4,6 +4,7 @@
 {% block content %}
   <button id="start" onclick="start()">Start simulation!</button>
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
+  <pre id="result"></pre>
 {% endblock %}
 
 {% block script %}
@@ -11,11 +12,12 @@
     function start() {
       document.getElementById("start").disabled = true;
       document.querySelector(".loading").style.display = "block";
-      fetch().then(load)
+      fetch("/websim/").then((res) => res.json()).then(load);
     }
 
-    function load() {
-      
+    function load(data) {
+      document.querySelector(".loading").style.display = "none";
+      document.getElementById("result").textContent = JSON.stringify(data, null, 2);
     }
   </script>
 {% endblock %}
