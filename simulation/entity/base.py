@@ -37,7 +37,7 @@ class Entity(Sprite):
 
   @classmethod
   def log(cls, ctx: Entity, act: str, *args) -> None:
-    print(f"{cls.tick:4}:" if Entity.ln else " " * 5, ctx, act.rjust(4), *args, file=cls.file)
+    print(f"{cls.tick:4}:" if cls.ln else " " * 5, ctx, act.rjust(4), *args, file=cls.file)
     cls.ln = False
 
   @classmethod
@@ -45,16 +45,16 @@ class Entity(Sprite):
     cls.tick += 1
     cls.ln = True
 
-  @staticmethod
-  def reset() -> None:
-    Entity.tick = -1
-    Entity.count = 0
-    Entity.entities: dict[int, Entity] = {}
-    Entity.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
+  @classmethod
+  def reset(cls) -> None:
+    cls.tick = -1
+    cls.count = 0
+    cls.entities: dict[int, Entity] = {}
+    cls.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
     try:
-      Entity.file = open(f"simulation/logs/{Entity.dt}.bioinses", "w", 1)
+      cls.file = open(f"simulation/logs/{cls.dt}.bioinses", "w", 1)
     except:
-      Entity.file = None
-    Entity.ln = True
+      cls.file = None
+    cls.ln = True
 
 Entity.reset()
