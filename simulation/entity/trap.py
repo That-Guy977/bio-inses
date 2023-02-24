@@ -1,8 +1,8 @@
 from pygame.sprite import Group
-from entity.base import Entity
-from entity.insect import Insect
-from entity.params import Params
-from util import Point, size
+from .base import Entity
+from .insect import Insect
+from .params import Params
+from ..util import Point, size
 
 class Trap(Entity):
   params = Params(

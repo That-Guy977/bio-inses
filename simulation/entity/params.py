@@ -1,5 +1,5 @@
 from __future__ import annotations
-from util import deviate
+from ..util import deviate
 
 class Params:
   def __init__(self, type: str, parents: list[Params] = [], **kwargs):

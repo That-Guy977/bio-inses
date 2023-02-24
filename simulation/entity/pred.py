@@ -1,6 +1,6 @@
-from entity.insect import Insect
-from entity.params import Params
-from util import Point
+from .insect import Insect
+from .params import Params
+from ..util import Point
 
 class Pred(Insect):
   params = Params(

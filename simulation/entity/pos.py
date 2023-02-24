@@ -1,6 +1,6 @@
-from entity.base import Entity
-from entity.params import Params
-from util import Point
+from .base import Entity
+from .params import Params
+from ..util import Point
 
 class Position(Entity):
   params = Params(

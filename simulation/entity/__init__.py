@@ -1,7 +1,7 @@
-from entity.base import Entity
-from entity.insect import Insect, InsectState
-from entity.pest import Pest
-from entity.pred import Pred
-from entity.trap import Trap
-from entity.pos import Position
-from entity.params import Params, deviate
+from .base import Entity
+from .insect import Insect, InsectState
+from .pest import Pest
+from .pred import Pred
+from .trap import Trap
+from .pos import Position
+from .params import Params, deviate

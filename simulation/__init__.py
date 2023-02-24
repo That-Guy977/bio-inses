@@ -1,5 +1,2 @@
-from __main__ import *
-import entity
-import util
-import weather
-import capture
+from .main import *
+from . import entity, util, weather, capture

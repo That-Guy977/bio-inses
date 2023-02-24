@@ -1,8 +1,8 @@
 from __future__ import annotations
 from pygame import Surface, Rect
 from pygame.sprite import Sprite
-from entity.params import Params
-from util import Point, size
+from .params import Params
+from ..util import Point, size
 from datetime import datetime
 
 class Entity(Sprite):

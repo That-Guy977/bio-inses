@@ -1,5 +1,5 @@
-from entity import Entity
-from util import name
+from .entity import Entity
+from .util import name
 from Quartz import \
   CGWindowListCopyWindowInfo as COPY_WINDOW_INFO, \
   kCGWindowListOptionAll as OPTION_ALL, \
