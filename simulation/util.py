@@ -8,6 +8,9 @@ size = Vector2(500, 500)
 
 tlimit = 1000
 
+logs_dir = f"simulation/logs"
+capture_dir = f"simulation/runs"
+
 class Point(Vector2):
   def truncate(self) -> Self:
     self.x = float(int(self.x))
