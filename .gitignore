@@ -1,0 +1,6 @@
+logs/
+runs/
+_*
+!__*__.py
+
+.DS_Store
