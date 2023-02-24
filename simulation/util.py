@@ -1,6 +1,6 @@
+import math, random
 from pygame.math import Vector2, clamp
 from typing import Self
-import math, random
 
 name = "BIO-INSES"
 

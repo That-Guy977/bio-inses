@@ -1,5 +1,4 @@
-from .entity import Entity
-from .util import name
+import os, subprocess
 from Quartz import \
   CGWindowListCopyWindowInfo as COPY_WINDOW_INFO, \
   kCGWindowListOptionAll as OPTION_ALL, \
@@ -7,7 +6,8 @@ from Quartz import \
   kCGWindowNumber as WINDOW_NUMBER, \
   kCGWindowName as WINDOW_NAME, \
   kCGWindowOwnerName as WINDOW_OWNER_NAME
-import os, subprocess
+from .entity import Entity
+from .util import name
 
 MAX_ATTEMPTS = 5
 

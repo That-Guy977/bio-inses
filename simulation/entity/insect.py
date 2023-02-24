@@ -1,10 +1,10 @@
 from __future__ import annotations
+import random
 from pygame.sprite import Group
 from .base import Entity
 from .pos import Position
 from .params import Params
 from ..util import Point, deviate
-import random
 
 class Insect(Entity):
   params = Params(

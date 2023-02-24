@@ -1,3 +1,4 @@
+import random
 import pygame
 from pygame import display, Surface
 from pygame.sprite import Group
@@ -7,7 +8,6 @@ from .util import name, size, tlimit, out_dir
 from .capture import save, set_outdir
 from .weather import geocode
 from typing import Sequence
-import os, random
 
 __all__ = ["main", "init", "tick", "check_end", "dead"]
 

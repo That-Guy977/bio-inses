@@ -1,10 +1,10 @@
 from __future__ import annotations
+import os
+from datetime import datetime
 from pygame import Surface, Rect
 from pygame.sprite import Sprite
 from .params import Params
 from ..util import Point, size
-from datetime import datetime
-import os
 
 class Entity(Sprite):
   def __init__(self, params: Params, pos: Point, color: int):
