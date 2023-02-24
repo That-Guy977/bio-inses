@@ -22,7 +22,7 @@ def main(seed: int = None):
     check_end(pests, preds, traps)
     wait(1)
 
-def init(seed: int):
+def init(seed: int = None):
   pygame.init()
   screen = display.set_mode(size)
   display.set_caption(name)
