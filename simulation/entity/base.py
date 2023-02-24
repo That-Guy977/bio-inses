@@ -51,10 +51,7 @@ class Entity(Sprite):
     cls.count = 0
     cls.entities: dict[int, Entity] = {}
     cls.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
-    try:
-      cls.file = open(f"{logs_loc}/{cls.dt}.bioinses", "w", 1)
-    except:
-      cls.file = None
+    cls.file = open(f"{logs_loc}/{cls.dt}.bioinses", "w", 1)
     cls.ln = True
 
 Entity.reset()
