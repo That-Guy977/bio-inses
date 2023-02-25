@@ -31,7 +31,7 @@ def init(seed: int = None, outdir = out_dir):
   set_outdir(f"{outdir}/runs")
   # geocode("chiangmai,th")
   entities = Group(
-    # Trap.generate(),
+    Trap.generate(),
     Pest.generate(),
     Pred.generate(),
   )

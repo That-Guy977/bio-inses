@@ -18,7 +18,7 @@ class Insect(Entity):
     move_rand = 5,
     foodtype = [],
     feedchance = 1.0,
-    trapattr = (15, 15),
+    trapattr = (10, 5),
     reprorate = 0.005,
     deathrate = 0.002,
   )

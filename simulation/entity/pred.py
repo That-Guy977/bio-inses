@@ -16,7 +16,7 @@ class Pred(Insect):
     food_s = 80,
     foodsize = 50,
     food_search = 0.8,
-    foodattr = (40, 15),
+    foodattr = (40, 20),
     feedtime = 24,
     repro_food = 100,
     repro_req = 150,
