@@ -13,12 +13,12 @@ __all__ = ["main", "init", "tick", "check_end", "dead"]
 
 def main(seed: int = None):
 
-  screen, (entities, pests, preds, traps), _ = init(seed)
+  screen, entities, _ = init(seed)
   while True:
     tick(screen, entities)
     save()
-    print(f"{Entity.tick:4} ; Pests: {len(pests):3} ; Preds: {len(preds):3} ; Trapped: {sum(map(len, Trap.traps)):3}", end="\r")
-    check_end(pests, preds, traps)
+    print(f"{Entity.tick:4} ; Pests: {Insect.counts['PEST']:3} ; Preds: {Insect.counts['PRED']:3} ; Trapped: {sum(map(len, Trap.traps)):3}", end="\r")
+    check_end()
     wait(1)
 
 def init(seed: int = None, outdir = out_dir):
@@ -30,15 +30,13 @@ def init(seed: int = None, outdir = out_dir):
   Entity.reset(f"{outdir}/logs")
   set_outdir(f"{outdir}/runs")
   # geocode("chiangmai,th")
-  entities: Group = Group()
-  traps = None
-  entities.add(
-    # traps := Trap.generate(),
-    pests := Pest.generate(),
-    preds := Pred.generate(),
+  entities = Group(
+    # Trap.generate(),
+    Pest.generate(),
+    Pred.generate(),
   )
-  Trap.bind(pests, preds, entities)
-  return screen, (entities, pests, preds, traps), seed
+  Trap.bind(entities)
+  return screen, entities, seed
 
 def tick(screen: Surface, entities: Group, cb = lambda: print()):
   Entity.next_tick()
@@ -53,15 +51,15 @@ def tick(screen: Surface, entities: Group, cb = lambda: print()):
   entities.draw(screen)
   display.update()
 
-def check_end(pests: Sequence[Pest], preds: Sequence[Pred], traps: Sequence[Trap], tlim = tlimit):
+def check_end(tlim = tlimit):
   if Entity.tick >= tlim:
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     Entity.log("MAIN", "time")
-    Entity.log("MAIN", "gsz", len(pests), len(preds))
-  elif dead(pests, preds, traps):
+    Entity.log("MAIN", "gsz", Insect.counts["PEST"], Insect.counts["PRED"])
+  elif dead():
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     Entity.log("MAIN", "end")
 
-def dead(pests: Sequence[Pest], preds: Sequence[Pred], traps: Sequence[Trap]) -> bool:
-  return not pests and not preds \
-    and (not traps or all(trap.empty() for trap in traps))
+def dead() -> bool:
+  return not Insect.counts["PEST"] and not Insect.counts["PRED"] \
+    and all(trap.empty() for trap in Trap.traps)

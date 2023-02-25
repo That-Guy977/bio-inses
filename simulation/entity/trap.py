@@ -1,3 +1,4 @@
+from __future__ import annotations
 from pygame.sprite import Group
 from .base import Entity
 from .insect import Insect
@@ -17,13 +18,11 @@ class Trap(Entity):
     super().__init__(pos, 0x00FFFF)
     self.held = []
     none: Group = None
-    self.pests = none
-    self.preds = none
     self.entities = none
 
   def update(self):
-    for insc in [*self.pests, *self.preds]:
-      if self.touch(insc):
+    for insc in self.entities:
+      if isinstance(insc, Insect) and self.touch(insc):
         self.capture(insc)
     if Entity.tick and Entity.tick % self.params.release == 0:
       for insc in self.held:
@@ -39,11 +38,6 @@ class Trap(Entity):
     insc.pos = Point.random()
     insc.mark()
     self.entities.add(insc)
-    match insc.type:
-      case "PEST":
-        self.pests.add(insc)
-      case "PRED":
-        self.preds.add(insc)
     Entity.log(self, "rls", insc)
 
   def empty(self) -> bool:
@@ -68,8 +62,6 @@ class Trap(Entity):
     return cls.traps
 
   @classmethod
-  def bind(cls, pests: Group, preds: Group, entities: Group) -> None:
+  def bind(cls, entities: Group) -> None:
     for trap in cls.traps:
-      trap.pests = pests
-      trap.preds = preds
       trap.entities = entities

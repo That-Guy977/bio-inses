@@ -1,10 +1,10 @@
 from __future__ import annotations
 import random
-from pygame.sprite import Group
 from .base import Entity
 from .pos import Position
 from .params import Params
 from ..util import Point, deviate
+from typing import Sequence
 
 class Insect(Entity):
   params = Params(
@@ -16,17 +16,22 @@ class Insect(Entity):
     move_dist_s = 15,
     move_idle = 0.8,
     move_rand = 5,
-    foodtype = None,
+    foodtype = [],
     feedchance = 1.0,
     trapattr = (15, 15),
     reprorate = 0.005,
     deathrate = 0.002,
   )
 
+  counts: dict[str, int] = {}
+
   def __init__(self, pos: Point, colors: tuple[int, int]):
     super().__init__(pos, colors[0])
     self.state = InsectState(self)
     self.colors = colors
+    if self.type not in Insect.counts:
+      Insect.counts[self.type] = 0
+    Insect.counts[self.type] += 1
     Entity.log(self, "init")
 
   def update(self):
@@ -51,7 +56,7 @@ class Insect(Entity):
   def search(self) -> None: 
     target = self.state.target
     attr = self.get_attr(target) if target is not None else 0
-    for entity in self.groups()[1]:
+    for entity in self.groups()[0]:
       ent_attr = self.get_attr(entity)
       if ent_attr > attr and ent_attr >= 0.1:
         target = entity
@@ -81,6 +86,7 @@ class Insect(Entity):
   def kill(self) -> None:
     if self.state.active:
       self.remove()
+      Insect.counts[self.type] -= 1
       Entity.log(self, "dead")
 
   def mark(self) -> None:
@@ -102,7 +108,7 @@ class Insect(Entity):
     attr_str = None
     if target.type == "TRAP":
       attr_str = self.params.trapattr
-    elif target.type == self.params.foodtype:
+    elif target.type in self.params.foodtype:
       search_threshold = self.params.food_cap * self.params.food_search
       if self.state.food <= search_threshold:
         attr_str = self.params.foodattr
@@ -113,8 +119,8 @@ class Insect(Entity):
     return cls(src.pos)
 
   @classmethod
-  def generate(cls) -> Group:
-    return Group(*[cls(Point.random()) for _ in range(cls.params.count)])
+  def generate(cls) -> Sequence[Insect]:
+    return [cls(Point.random()) for _ in range(cls.params.count)]
 
 class InsectState:
   def __init__(self, insect: Insect):
