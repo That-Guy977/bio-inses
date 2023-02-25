@@ -36,7 +36,7 @@ header {
 }
 
 main {
-  margin: 50px 0;
+  margin: 50px 0 0;
 }
 
 .flex,.center {
@@ -59,20 +59,20 @@ a.flex {
   font-size: calc(40px / 3);
   text-decoration: none;
   transition: all 0.2s;
-}    
+}
 
 a.flex:hover {
   background-color: #E0E0E0;
   border-style: inset;
-}  
+}
 
 .loading {
   display: none;
   animation: spin 2s linear infinite;
-}  
+}
 
 @keyframes spin {
   100% {
     transform: rotate(360deg); 
-  }  
+  }
 }
