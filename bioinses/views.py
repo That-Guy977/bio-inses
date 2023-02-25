@@ -1,8 +1,6 @@
 import subprocess
 from django.conf import settings
 from django.http import HttpResponse
-from simulation import *
-from simulation.entity import *
 
 def websim(request):
   data = subprocess.run(
