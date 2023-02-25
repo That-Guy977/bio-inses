@@ -10,6 +10,7 @@ ROOT_URLCONF = "bioinses.urls"
 
 INSTALLED_APPS = [
   "django.contrib.staticfiles",
+  "fontawesomefree",
 ]
 
 MIDDLEWARE = [
