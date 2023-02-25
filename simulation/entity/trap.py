@@ -14,7 +14,7 @@ class Trap(Entity):
   traps = Group()
 
   def __init__(self, pos: Point):
-    super().__init__(Trap.params, pos, 0x00FFFF)
+    super().__init__(pos, 0x00FFFF)
     self.held = []
     none: Group = None
     self.pests = none

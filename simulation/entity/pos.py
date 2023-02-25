@@ -9,7 +9,7 @@ class Position(Entity):
   )
 
   def __init__(self, pos: Point):
-    super().__init__(Position.params, pos, 0)
+    super().__init__(pos, 0)
 
   def __str__(self):
     return f"{self.type}@{self.pos}"

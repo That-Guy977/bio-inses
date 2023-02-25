@@ -23,8 +23,8 @@ class Insect(Entity):
     deathrate = 0.002,
   )
 
-  def __init__(self, params: Params, pos: Point, colors: tuple[int, int]):
-    super().__init__(params, pos, colors[0])
+  def __init__(self, pos: Point, colors: tuple[int, int]):
+    super().__init__(pos, colors[0])
     self.state = InsectState(self)
     self.colors = colors
     Entity.log(self, "init")

@@ -3,16 +3,15 @@ import os
 from datetime import datetime
 from pygame import Surface, Rect
 from pygame.sprite import Sprite
-from .params import Params
 from ..util import Point, size
 
 class Entity(Sprite):
-  def __init__(self, params: Params, pos: Point, color: int):
+  def __init__(self, pos: Point, color: int):
     super().__init__()
     self.id = Entity.count
-    self.params = params
-    self.type = params.type
-    self.size = params.size
+    self.params = self.__class__.params
+    self.type = self.params.type
+    self.size = self.params.size
     self.pos = pos
     self.image = Surface((self.size, self.size))
     self.image.fill(color)

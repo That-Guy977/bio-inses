@@ -20,7 +20,7 @@ class Pest(Insect):
   )
 
   def __init__(self, pos: Point):
-    super().__init__(Pest.params, pos, (0xFF0000, 0xFF8000))
+    super().__init__(pos, (0xFF0000, 0xFF8000))
 
   def feed(self) -> None:
     Entity.log(self, "feed")

@@ -24,4 +24,4 @@ class Pred(Insect):
   )
 
   def __init__(self, pos: Point):
-    super().__init__(Pred.params, pos, (0x00FF00, 0xFFFF00))
+    super().__init__(pos, (0x00FF00, 0xFFFF00))
