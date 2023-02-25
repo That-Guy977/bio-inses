@@ -28,3 +28,5 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
   "bioinses/static"
 ]
+
+TIME_ZONE = "Asia/Bangkok"
