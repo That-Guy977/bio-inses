@@ -16,7 +16,7 @@ class Entity(Sprite):
     self.image = Surface((self.size, self.size))
     self.image.fill(color)
     self.rect = Rect(self.pos.truncate(), (self.size, self.size))
-    Entity.entities[self.id] = self
+    # Entity.entities[self.id] = self
     Entity.count += 1
 
   def update(self) -> None:
@@ -49,7 +49,7 @@ class Entity(Sprite):
   def reset(cls, outdir: str) -> None:
     cls.tick = -1
     cls.count = 0
-    cls.entities: dict[int, Entity] = {}
+    # cls.entities: dict[int, Entity] = {}
     os.makedirs(f"{outdir}", exist_ok=True)
     cls.dt = f"{datetime.now():%Y%m%d-%H%M%S}"
     cls.file = open(f"{outdir}/{cls.dt}.bioinses", "w", 1)
