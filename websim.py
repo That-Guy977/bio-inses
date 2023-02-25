@@ -21,4 +21,4 @@ while True:
   if clk.get_time() > 10_000:
     Entity.log("MAIN", "ltnc")
     break
-  check_end(50)
+  check_end(300)
