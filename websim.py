@@ -13,9 +13,9 @@ data = {
   "dt": Entity.dt,
   "count": []
 }
-for t in range(util.tlimit):
+while True:
   clk.tick()
-  tick(screen, entities, lambda: print(json.dumps({ **data, "dur": t - 1 })))
+  tick(screen, entities, lambda: print(json.dumps({ **data, "dur": Entity.tick - 1 })))
   capture.save()
   data["count"].append((len(pests), len(preds), sum(map(len, Trap.traps))))
   if clk.get_time() > 10_000:
