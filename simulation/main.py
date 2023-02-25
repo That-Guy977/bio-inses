@@ -1,3 +1,4 @@
+from __future__ import annotations
 import random
 import pygame
 from pygame import display, Surface
@@ -7,7 +8,6 @@ from .entity import *
 from .util import name, size, tlimit, out_dir
 from .capture import save, set_outdir
 from .weather import geocode
-from typing import Sequence
 
 __all__ = ["main", "init", "tick", "check_end", "dead"]
 
@@ -38,7 +38,7 @@ def init(seed: int = None, outdir = out_dir):
   Trap.bind(entities)
   return screen, entities, seed
 
-def tick(screen: Surface, entities: Group, cb = lambda: print()):
+def tick(screen: Surface, entities: Group[Entity], cb = lambda: print()):
   Entity.next_tick()
   for event in pygame.event.get():
     if event.type == pygame.QUIT:

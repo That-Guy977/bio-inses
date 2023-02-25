@@ -12,12 +12,12 @@ class Trap(Entity):
     release = 200
   )
 
-  traps = Group()
+  traps: Group[Trap] = Group()
 
   def __init__(self, pos: Point):
     super().__init__(pos, 0x00FFFF)
     self.held = []
-    none: Group = None
+    none: Group[Entity] = None
     self.entities = none
 
   def update(self):
@@ -50,7 +50,7 @@ class Trap(Entity):
     return not self.empty()
 
   @classmethod
-  def generate(cls) -> Group:
+  def generate(cls) -> Group[Trap]:
     cls.traps.add(
       cls(Point(
         a * size.x // 4 - cls.params.size // 2,
@@ -62,6 +62,6 @@ class Trap(Entity):
     return cls.traps
 
   @classmethod
-  def bind(cls, entities: Group) -> None:
+  def bind(cls, entities: Group[Entity]) -> None:
     for trap in cls.traps:
       trap.entities = entities
