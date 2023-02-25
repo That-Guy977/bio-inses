@@ -5,7 +5,7 @@ from simulation.entity import *
 
 BASE_DIR = sys.argv[1]
 
-screen, (entities, pests, preds, traps), seed = init(None, BASE_DIR)
+screen, entities, seed = init(None, BASE_DIR)
 clk = pygame.time.Clock()
 data = {
   "seed": seed,
@@ -17,8 +17,8 @@ while True:
   clk.tick()
   tick(screen, entities, lambda: print(json.dumps({ **data, "dur": Entity.tick - 1 })))
   capture.save()
-  data["count"].append((len(pests), len(preds), sum(map(len, Trap.traps))))
+  data["count"].append(Insect.counts.copy())
   if clk.get_time() > 10_000:
     Entity.log("MAIN", "ltnc")
     break
-  check_end(pests, preds, traps, 50)
+  check_end(50)
