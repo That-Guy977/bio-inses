@@ -30,4 +30,8 @@ STATICFILES_DIRS = [
   "bioinses/static"
 ]
 
+MEDIA_URL = "media/"
+
+MEDIA_ROOT = "bioinses/media"
+
 TIME_ZONE = "Asia/Bangkok"
