@@ -58,12 +58,12 @@ class Insect(Entity):
     attr = self.get_attr(target) if target is not None else 0
     for entity in self.groups()[0]:
       ent_attr = self.get_attr(entity)
-      if ent_attr > attr and ent_attr >= 0.1:
+      if ent_attr > attr and ent_attr >= 0.5:
         target = entity
         attr = ent_attr
     if target is None:
       target = Position(Point.random())
-    elif attr < 0.2:
+    elif attr < 1:
       target = Position(target.pos)
     if target != self.state.target:
       Entity.log(self, "trgt", target)
