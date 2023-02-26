@@ -3,7 +3,6 @@
 
 {% block content %}
   <input type="file" accept="image/*" onchange="update(event);">
-  <button id="submit" disabled onclick="demo()">Submit</button>
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
   <div class="flex">
     <img id="preview" width="500">
@@ -14,14 +13,11 @@
 {% block script %}
   <script>
     function update(event) {
-      const submit = document.getElementById("submit");
       const [file] = event.target.files;
       if (file) {
-        submit.disabled = false;
         loading();
         setTimeout(display, 2000);
       } else {
-        submit.disabled = true;
         document.getElementById("preview").textContent = "";
       }
     }
@@ -38,9 +34,10 @@
       preview.src = "{% static 'detect.jpg' %}";
       const vals = document.getElementById("vals");
       vals.innerHTML = `
-        <h2>พบแมลง 102 ตัว</h2>
-        <h2 style="color: red">พบแมลงไม่ดี 57 ตัว</h2>
-        <h2 style="color: blue">พบแมลงดี 45 ตัว</h2>
+        <span style="font-size: 24px;">พบแมลง 102 ตัว</span>
+        <span style="font-size: 24px; color: red;">พบแมลงไม่ดี 57 ตัว</span>
+        <span style="font-size: 24px; color: blue;">พบแมลงดี 45 ตัว</span>
+        <br>
         <button>รายละเอียด</button>
         <a class="flex" href="{% url 'simulation' %}">Simulation</a>
       `;
