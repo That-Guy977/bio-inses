@@ -33,16 +33,14 @@
     function load() {
       document.querySelector(".loading").style.display = "none";
       document.getElementById("start").style.display = "none";
-      document.getElementById("result").style.display = "block";
+      document.getElementById("result").style.display = "flex";
       document.getElementById("controls").style.display = "flex";
       loadFrame();
     }
 
     function loadFrame() {
-      const [frame, clock] = ["frame", "clock", "controls"].map((id) => document.getElementById(id));
-      const endTick = data.dur;
-      frame.src = `{% get_media_prefix %}runs/${data.dt}/${tick.toString().padStart(4, "0")}.png`;
-      clock.textContent = `${tick}/${data.dur}`;
+      document.getElementById("frame").src = `{% get_media_prefix %}runs/${data.dt}/${tick.toString().padStart(4, "0")}.png`;
+      document.getElementById("clock").textContent = `${tick}/${data.dur}`;
     }
 
     function playpause() {
