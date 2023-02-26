@@ -11,6 +11,7 @@
       <button onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>
       <button onclick="prev()"><i class="fa-solid fa-backward-step"></i></button>
       <button onclick="playpause()"><i id="playpause" class="fa-solid fa-play"></i></button>
+      <button onclick="repeat()"><i id="repeat" class="fa-solid fa-repeat"></i></button>
       <button onclick="next()"><i class="fa-solid fa-forward-step"></i></button>
       <button onclick="toEnd()"><i class="fa-solid fa-forward-fast"></i></button>
     </div>
@@ -22,6 +23,7 @@
     let data = null;
     let tick = 0;
     let playing = false;
+    let repeating = false;
 
     async function start() {
       document.getElementById("start").disabled = true;
@@ -55,12 +57,15 @@
       playing = true;
       document.getElementById("playpause")
         .classList.replace("fa-play", "fa-pause");
+      if (tick === data.dur) tick = -1;
       const playNext = () => {
         if (playing) {
-          tick++;
-          if (tick > data.dur) tick = 0;
-          loadFrame();
-          setTimeout(playNext, 100);
+          if (tick < data.dur || repeating) {
+            tick++;
+            if (tick > data.dur) tick = 0;
+            loadFrame();
+            setTimeout(playNext, 100);
+          } else pause();
         }
       }
       playNext();
@@ -70,6 +75,12 @@
       playing = false;
       document.getElementById("playpause")
         .classList.replace("fa-pause", "fa-play");
+    }
+
+    function repeat() {
+      repeating = !repeating;
+      document.getElementById("repeat").parentElement
+        .classList.toggle("selected");
     }
 
     function prev() {
@@ -115,7 +126,7 @@
       height: 30px;
     }
 
-    #controls>button:active {
+    #controls>button:active,.selected {
       border-style: inset;
     }
   </style>
