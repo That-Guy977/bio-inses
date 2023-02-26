@@ -10,7 +10,7 @@
     <div class="flex" id="controls">
       <button onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>
       <button onclick="prev()"><i class="fa-solid fa-backward-step"></i></button>
-      <button onclick="play()"><i id="play-pause" class="fa-solid fa-pause"></i></button>
+      <button onclick="play()"><i id="playpause" class="fa-solid fa-pause"></i></button>
       <button onclick="next()"><i class="fa-solid fa-forward-step"></i></button>
       <button onclick="toEnd()"><i class="fa-solid fa-forward-fast"></i></button>
     </div>
@@ -40,7 +40,7 @@
 
     function loadFrame() {
       const [frame, clock] = ["frame", "clock", "controls"].map((id) => document.getElementById(id));
-      const playpause = document.getElementById("play-pause")
+      const playpause = document.getElementById("playpause")
       playpause.className = [playpause.className.split(" ")[0], playing ? "fa-pause" : "fa-play"].join(" ");
       const endTick = data.dur;
       frame.src = `{% get_media_prefix %}runs/${data.dt}/${tick.toString().padStart(4, "0")}.png`;
