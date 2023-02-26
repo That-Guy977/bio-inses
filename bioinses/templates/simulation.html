@@ -40,48 +40,63 @@
 
     function loadFrame() {
       const [frame, clock] = ["frame", "clock", "controls"].map((id) => document.getElementById(id));
-      const playpause = document.getElementById("playpause")
-      playpause.className = [playpause.className.split(" ")[0], playing ? "fa-pause" : "fa-play"].join(" ");
       const endTick = data.dur;
       frame.src = `{% get_media_prefix %}runs/${data.dt}/${tick.toString().padStart(4, "0")}.png`;
       clock.textContent = `${tick}/${data.dur}`;
     }
 
     function playpause() {
-      playing = !playing;
-      loadFrame();
-      const f = () => {
-        tick++;
-        if (tick > data.dur) tick = 0;
-        loadFrame();
-        if (playing) setTimeout(f, 100);
+      if (!playing) {
+        play();
+      } else {
+        pause();
       }
-      f();
+    }
+
+    function play() {
+      playing = true;
+      document.getElementById("playpause")
+        .classList.replace("fa-play", "fa-pause");
+      const playNext = () => {
+        if (playing) {
+          tick++;
+          if (tick > data.dur) tick = 0;
+          loadFrame();
+          setTimeout(playNext, 100);
+        }
+      }
+      playNext();
+    }
+
+    function pause() {
+      playing = false;
+      document.getElementById("playpause")
+        .classList.replace("fa-pause", "fa-play");
     }
 
     function prev() {
       tick--;
       if (tick < 0) tick = data.dur;
-      playing = false;
+      pause();
       loadFrame();
     }
 
     function next() {
       tick++;
       if (tick > data.dur) tick = 0;
-      playing = false;
+      pause();
       loadFrame();
     }
     
     function toStart() {
       tick = 0;
-      playing = false;
+      pause();
       loadFrame();
     }
     
     function toEnd() {
       tick = data.dur;
-      playing = false;
+      pause();
       loadFrame();
     }
   </script>
