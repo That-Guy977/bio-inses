@@ -4,10 +4,10 @@
 {% block content %}
   <button id="start" onclick="start()">Start simulation!</button>
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
-  <div class="center" id="result">
+  <div id="result" class="center">
     <img id="frame" height="500"></img>
     <p id="clock"></p>
-    <div class="flex" id="controls">
+    <div id="controls" class="flex">
       <button onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>
       <button onclick="prev()"><i class="fa-solid fa-backward-step"></i></button>
       <button onclick="playpause()"><i id="playpause" class="fa-solid fa-play"></i></button>
