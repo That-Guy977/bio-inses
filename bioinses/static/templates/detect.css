@@ -1,0 +1,7 @@
+.result {
+  display: flex;
+}
+
+#preview {
+  margin: 10px;
+}

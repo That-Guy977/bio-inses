@@ -1,0 +1,16 @@
+#result {
+  display: none;
+}
+
+#clock {
+  text-align: center;
+}
+
+#controls>button {
+  width: 30px;
+  height: 30px;
+}
+
+#controls>button:active,.selected {
+  border-style: inset;
+}

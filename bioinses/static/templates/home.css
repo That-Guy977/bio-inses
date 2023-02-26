@@ -1,0 +1,10 @@
+a.navbutton {
+  width: 150px;
+  height: 80px;
+  border-width: medium;
+  font-size: 16px;
+}
+
+nav.flex {
+  gap: 20px;
+}
