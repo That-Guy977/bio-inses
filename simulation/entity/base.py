@@ -19,11 +19,11 @@ class Entity(Sprite):
     # Entity.entities[self.id] = self
     Entity.count += 1
 
-  def update(self) -> None:
+  def update(self):
     self.rect.update(self.pos.truncate().clamp(), self.rect.size)
     self.rect.clamp_ip((0, 0), size)
 
-  def color(self, color: int) -> None:
+  def color(self, color: int):
     self.image.fill(color)
 
   def touch(self, target: Entity) -> bool:
@@ -36,17 +36,17 @@ class Entity(Sprite):
     return f"{self.type}@{self.id:08x}"
 
   @classmethod
-  def log(cls, ctx: Entity, act: str, *args) -> None:
+  def log(cls, ctx: Entity, act: str, *args):
     print(f"{cls.tick:4}:" if cls.ln else " " * 5, ctx, act.rjust(4), *args, file=cls.file)
     cls.ln = False
 
   @classmethod
-  def next_tick(cls) -> None:
+  def next_tick(cls):
     cls.tick += 1
     cls.ln = True
 
   @classmethod
-  def reset(cls, outdir: str) -> None:
+  def reset(cls, outdir: str):
     cls.tick = -1
     cls.count = 0
     # cls.entities: dict[int, Entity] = {}

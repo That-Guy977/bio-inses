@@ -40,17 +40,17 @@ class Trap(Entity):
     self.entities.add(insc)
     Entity.log(self, "rls", insc)
 
-  def empty(self) -> bool:
+  def empty(self):
     return len(self) == 0
 
   def __len__(self):
     return len(self.held)
 
-  def __bool__(self) -> bool:
+  def __bool__(self):
     return not self.empty()
 
   @classmethod
-  def generate(cls) -> Group[Trap]:
+  def generate(cls):
     cls.traps.add(
       cls(Point(
         a * size.x // 4 - cls.params.size // 2,
@@ -62,6 +62,6 @@ class Trap(Entity):
     return cls.traps
 
   @classmethod
-  def bind(cls, entities: Group[Entity]) -> None:
+  def bind(cls, entities: Group[Entity]):
     for trap in cls.traps:
       trap.entities = entities

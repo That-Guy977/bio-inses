@@ -40,7 +40,7 @@ class Insect(Entity):
     self.state.update()
     super().update()
 
-  def move(self) -> None:
+  def move(self):
     target = self.state.target
     dist = self.params.generate("move_dist")
     theta = deviate(self.pos.direction(target.pos), self.params.move_rand)
@@ -53,7 +53,7 @@ class Insect(Entity):
     self.pos += Point.polar(dist, theta)
     Entity.log(self, "move", target)
 
-  def search(self) -> None: 
+  def search(self): 
     target = self.state.target
     attr = self.get_attr(target) if target is not None else 0
     for entity in self.groups()[0]:
@@ -69,33 +69,33 @@ class Insect(Entity):
       Entity.log(self, "trgt", target)
     self.state.target = target
 
-  def feed(self) -> None:
+  def feed(self):
     self.eat(self.state.target)
     self.state.target = None
 
-  def eat(self, target: Entity) -> None:
+  def eat(self, target: Entity):
     target.kill()
     Entity.log(self, "eat", target)
 
-  def repro(self) -> None:
+  def repro(self):
     child = self.copy(self)
     for group in self.groups():
       group.add(child)
     Entity.log(self, "repr")
 
-  def kill(self) -> None:
+  def kill(self):
     if self.state.active:
       self.remove()
       Insect.counts[self.type] -= 1
       Entity.log(self, "dead")
 
-  def mark(self) -> None:
+  def mark(self):
     self.state.reset()
     self.state.mark = True
     self.color(self.colors[1])
     Entity.log(self, "mark")
 
-  def remove(self) -> None:
+  def remove(self):
     self.state.active = False
 
   def can_feed(self) -> bool:
@@ -119,7 +119,7 @@ class Insect(Entity):
     return cls(src.pos)
 
   @classmethod
-  def generate(cls) -> Sequence[Insect]:
+  def generate(cls):
     return [cls(Point.random()) for _ in range(cls.params.count)]
 
 class InsectState:
@@ -127,7 +127,7 @@ class InsectState:
     self.insect = insect
     self.reset()
 
-  def update(self) -> None:
+  def update(self):
     self.insect.search()
     params = self.insect.params
     if self.feed > 0:
@@ -148,7 +148,7 @@ class InsectState:
       self.insect.feed()
       self.food = min(self.food + params.foodsize, params.food_cap)
 
-  def reset(self) -> None:
+  def reset(self):
     self.food = self.insect.params.generate("food")
     self.feed = 0
     target: Entity = None

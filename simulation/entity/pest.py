@@ -24,7 +24,7 @@ class Pest(Insect):
   def __init__(self, pos: Point):
     super().__init__(pos, (0xFF0000, 0xFF8000))
 
-  def feed(self) -> None:
+  def feed(self):
     Entity.log(self, "feed")
 
   def can_feed(self) -> bool:

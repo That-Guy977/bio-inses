@@ -12,7 +12,6 @@ from .weather import geocode
 __all__ = ["main", "init", "tick", "check_end", "dead"]
 
 def main(seed: int = None):
-
   screen, entities, _ = init(seed)
   while True:
     tick(screen, entities)
@@ -60,6 +59,6 @@ def check_end(tlim = tlimit):
     pygame.event.post(pygame.event.Event(pygame.QUIT))
     Entity.log("MAIN", "end")
 
-def dead() -> bool:
+def dead():
   return not Insect.counts["PEST"] and not Insect.counts["PRED"] \
     and all(trap.empty() for trap in Trap.traps)

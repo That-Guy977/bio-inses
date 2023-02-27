@@ -12,7 +12,7 @@ class Params:
         if k not in self:
           self[k] = parent[k]
 
-  def generate(self, param: str) -> int:
+  def generate(self, param: str):
     return deviate(self[param + "_m"], self[param + "_s"])
 
   def __contains__(self, name: str):

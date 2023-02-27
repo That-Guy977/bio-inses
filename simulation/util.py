@@ -37,5 +37,5 @@ class Point(Vector2):
   def random(cls):
     return cls([random.randint(0, dim) for dim in size])
 
-def deviate(m: int, s: int) -> int:
+def deviate(m: int, s: int):
   return m + random.randint(-s, s)
