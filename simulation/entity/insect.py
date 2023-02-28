@@ -112,7 +112,7 @@ class Insect(Entity):
       search_threshold = self.params.food_cap * self.params.food_search
       if self.state.food <= search_threshold:
         attr_str = self.params.foodattr
-    return 2**-((dist-attr_str[0])/attr_str[1]) if attr_str else 0.0
+    return 2**((attr_str[0]-dist)/attr_str[1]) if attr_str else 0.0
 
   @classmethod
   def copy(cls, src):
