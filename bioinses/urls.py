@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import websim
+from .websim import websim
 
 urlpatterns = [
   path("",            lambda request: render(request, "index.html"),      name="home"),
