@@ -5,6 +5,8 @@ from simulation.entity import *
 
 BASE_DIR = sys.argv[1]
 
+tlimit = 300
+
 screen, entities, seed = init(None, BASE_DIR)
 clk = pygame.time.Clock()
 data = {
@@ -21,4 +23,4 @@ while True:
   if clk.get_time() > 10_000:
     Entity.log("MAIN", "ltnc")
     break
-  check_end(300)
+  check_end(tlimit)
