@@ -4,6 +4,7 @@
 {% block content %}
   <button id="start" onclick="start()">Start simulation!</button>
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
+  <p id="load-progress"></p>
   <div id="result" class="center">
     <img id="frame" height="500">
     <p id="tick"></p>

@@ -5,22 +5,39 @@ from simulation.entity import *
 
 BASE_DIR = sys.argv[1]
 
-tlimit = 300
-
 screen, entities, seed = init(None, BASE_DIR)
-clk = pygame.time.Clock()
-data = {
+meta = {
   "seed": seed,
-  "dur": 0,
-  "dt": Entity.dt,
-  "count": []
+  "tlimit": 300,
 }
-while True:
-  clk.tick()
-  tick(screen, entities, lambda: print(json.dumps({ **data, "dur": Entity.tick - 1 })))
-  capture.save()
-  data["count"].append(Insect.counts.copy())
-  if clk.get_time() > 10_000:
-    Entity.log("MAIN", "ltnc")
-    break
-  check_end(tlimit)
+done = False
+clk = pygame.time.Clock()
+
+def main():
+  out()
+  while True:
+    tick(screen, entities, finalize)
+    out(Insect.counts)
+    clk.tick()
+    capture.save()
+    if clk.get_time() > 10_000:
+      Entity.log("MAIN", "ltnc")
+      break
+    check_end(meta["tlimit"])
+
+def out(data = None):
+  print(json.dumps({
+    "dt": Entity.dt,
+    "tick": Entity.tick,
+    "done": done,
+    "meta": meta,
+    "data": data
+  }))
+
+def finalize():
+  global done
+  done = True
+  out(Insect.count)
+
+if __name__ == "__main__":
+  main()

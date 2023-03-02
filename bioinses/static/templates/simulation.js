@@ -1,4 +1,7 @@
-let data = null;
+let run = null;
+let data = []
+let dur = -1;
+
 let tick = 0;
 let playing = false;
 let repeating = false;
@@ -6,21 +9,28 @@ let repeating = false;
 async function start() {
   document.getElementById("start").disabled = true;
   document.querySelector(".loading").style.display = "block";
-  data = await fetch("/websim/").then((res) => res.json());
-  load();
-}
-
-function load() {
-  document.querySelector(".loading").style.display = "none";
+  const info = await fetch("/websim/").then((res) => res.json());
+  run = info.dt;
+  dur = info.meta.tlimit;
   document.getElementById("start").style.display = "none";
+  while (true) {
+    const tickInfo = await fetch(`/websim/${run}/`).then((res) => res.json());
+    if (tickInfo.done) {
+      dur = tickInfo.tick;
+      break;
+    }
+    data.push(tickInfo.data);
+    document.getElementById("load-progress").textContent = `(${tickInfo.tick}/${dur})`;
+  }
+  document.querySelector(".loading").style.display = "none";
+  document.getElementById("load-progress").textContent = "";
   document.getElementById("result").style.display = "flex";
-  document.getElementById("controls").style.display = "flex";
   loadFrame();
 }
 
 function loadFrame() {
-  document.getElementById("frame").src = `/media/runs/${data.dt}/${tick.toString().padStart(4, "0")}.png`;
-  document.getElementById("tick").textContent = `${tick}/${data.dur}`;
+  document.getElementById("frame").src = `/media/runs/${run}/${tick.toString().padStart(4, "0")}.png`;
+  document.getElementById("tick").textContent = `${tick}/${dur}`;
   updateControls();
 }
 
@@ -44,12 +54,12 @@ function play() {
   playing = true;
   document.getElementById("playpause-icon")
     .classList.replace("fa-play", "fa-pause");
-  if (tick === data.dur) tick = -1;
+  if (tick === dur) tick = -1;
   const playNext = () => {
     if (playing) {
-      if (tick < data.dur || repeating) {
+      if (tick < dur || repeating) {
         tick++;
-        if (tick > data.dur) tick = 0;
+        if (tick > dur) tick = 0;
         loadFrame();
         setTimeout(playNext, 100);
       } else {
@@ -75,14 +85,14 @@ function repeat() {
 
 function prev() {
   tick--;
-  if (tick < 0) tick = data.dur;
+  if (tick < 0) tick = dur;
   pause();
   loadFrame();
 }
 
 function next() {
   tick++;
-  if (tick > data.dur) tick = 0;
+  if (tick > dur) tick = 0;
   pause();
   loadFrame();
 }
@@ -94,7 +104,7 @@ function toStart() {
 }
 
 function toEnd() {
-  tick = data.dur;
+  tick = dur;
   pause();
   loadFrame();
 }
