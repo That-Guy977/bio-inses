@@ -6,14 +6,14 @@
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
   <div id="result" class="center">
     <img id="frame" height="500">
-    <p id="clock"></p>
+    <p id="tick"></p>
     <div id="controls" class="flex">
-      <button onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>
-      <button onclick="prev()"><i class="fa-solid fa-backward-step"></i></button>
-      <button onclick="playpause()"><i id="playpause" class="fa-solid fa-play"></i></button>
-      <button onclick="repeat()"><i id="repeat" class="fa-solid fa-repeat"></i></button>
-      <button onclick="next()"><i class="fa-solid fa-forward-step"></i></button>
-      <button onclick="toEnd()"><i class="fa-solid fa-forward-fast"></i></button>
+      <button id="media-start" onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>
+      <button id="media-prev" onclick="prev()"><i class="fa-solid fa-backward-step"></i></button>
+      <button id="media-playpause" onclick="playpause()"><i id="playpause-icon" class="fa-solid fa-play"></i></button>
+      <button id="media-repeat" onclick="repeat()"><i id="repeat-icon" class="fa-solid fa-repeat"></i></button>
+      <button id="media-next" onclick="next()"><i class="fa-solid fa-forward-step"></i></button>
+      <button id="media-end" onclick="toEnd()"><i class="fa-solid fa-forward-fast"></i></button>
     </div>
   </div>
 {% endblock %}
