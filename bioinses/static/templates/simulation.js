@@ -23,7 +23,7 @@ async function start() {
     document.getElementById("load-progress").textContent = `(${tickInfo.tick}/${dur})`;
   }
   document.querySelector(".loading").style.display = "none";
-  document.getElementById("load-progress").textContent = "";
+  document.getElementById("load-progress").style.display = "none";
   document.getElementById("result").style.display = "flex";
   loadFrame();
 }
