@@ -20,6 +20,7 @@ async function start() {
       break;
     }
     data.push(tickInfo.data);
+    setTimeout(() => fetch(simtick(run, tickInfo.tick)), 500)
     document.getElementById("load-progress").textContent = `(${tickInfo.tick}/${dur})`;
   }
   document.querySelector(".loading").style.display = "none";
@@ -29,7 +30,7 @@ async function start() {
 }
 
 function loadFrame() {
-  document.getElementById("frame").src = `/media/runs/${run}/${tick.toString().padStart(4, "0")}.png`;
+  document.getElementById("frame").src = simtick(run, tick);
   document.getElementById("tick").textContent = `${tick}/${dur}`;
   const pestCount = data[tick]["PEST"];
   const predCount = data[tick]["PRED"];
@@ -116,4 +117,8 @@ function toEnd() {
 
 function setEnabled(id, enabled) {
   document.getElementById(id).disabled = !enabled;
+}
+
+function simtick(run, tick) {
+  return `/media/runs/${run}/${tick.toString().padStart(4, "0")}.png`
 }
