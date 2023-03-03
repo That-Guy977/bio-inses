@@ -6,7 +6,14 @@
   <img class="loading" width="150" src="{% static 'loading.svg' %}">
   <p id="load-progress"></p>
   <div id="result" class="center">
-    <img id="frame" height="500">
+    <div id="websim" class="flex">
+      <img id="frame" height="500">
+      <div class="center">
+        <span id="insc-count-total"></span>
+        <span id="insc-count-pest"></span>
+        <span id="insc-count-pred"></span>
+      </div>
+    </div>
     <p id="tick"></p>
     <div id="controls" class="flex">
       <button id="media-start" onclick="toStart()"><i class="fa-solid fa-backward-fast"></i></button>

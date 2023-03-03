@@ -31,6 +31,11 @@ async function start() {
 function loadFrame() {
   document.getElementById("frame").src = `/media/runs/${run}/${tick.toString().padStart(4, "0")}.png`;
   document.getElementById("tick").textContent = `${tick}/${dur}`;
+  const pestCount = data[tick]["PEST"];
+  const predCount = data[tick]["PRED"];
+  document.getElementById("insc-count-total").textContent = `แมลงทั้งหมด ${pestCount + predCount} ตัว`;
+  document.getElementById("insc-count-pest").textContent = `แมลงไม่ดี ${pestCount} ตัว`;
+  document.getElementById("insc-count-pred").textContent = `แมลงดี ${predCount} ตัว`;
   updateControls();
 }
 
