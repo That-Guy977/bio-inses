@@ -16,7 +16,7 @@ async function start() {
   while (true) {
     const tickInfo = await fetch(`/websim/${run}/`).then((res) => res.json());
     if (tickInfo.done) {
-      dur = tickInfo.tick;
+      dur = tickInfo.tick - 1;
       break;
     }
     data.push(tickInfo.data);
@@ -36,9 +36,9 @@ function loadFrame() {
 
 function updateControls() {
   setEnabled("media-start", playing || tick !== 0);
-  setEnabled("media-end", playing || tick !== data.dur);
+  setEnabled("media-end", playing || tick !== dur);
   setEnabled("media-prev", !playing && tick !== 0);
-  setEnabled("media-next", !playing && tick !== data.dur);
+  setEnabled("media-next", !playing && tick !== dur);
 }
 
 function playpause() {
