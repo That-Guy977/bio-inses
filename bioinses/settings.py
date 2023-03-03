@@ -6,6 +6,8 @@ SECRET_KEY = "django-insecure-carq2!&zn!%=w$ogz_*-nfxdm^-+j^ne+0uub)k9m7wlm9owy"
 
 DEBUG = True
 
+ALLOWED_HOSTS = ["*"]
+
 ROOT_URLCONF = "bioinses.urls"
 
 INSTALLED_APPS = [
