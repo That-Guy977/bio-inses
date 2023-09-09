@@ -13,10 +13,9 @@ $ git clone https://github.com/that-guy977/bio-inses
 # Using gh:
 $ gh repo clone that-guy977/bio-inses
 ```
-- Set up `venv` if desired.
-- Install dependancies:
+- Run the setup script.
 ```sh
-$ pip install -r requirements.txt
+$ ./setup.sh
 ```
 
 ## Activation
