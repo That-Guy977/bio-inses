@@ -17,7 +17,7 @@ location = {
 
 def weather(endpoint: str, **params: str):
   return requests.get(f"https://api.openweathermap.org{endpoints[endpoint]}", params={
-    "appid": "a7e321a078be5c504801d053222f8f9f",
+    "appid": "OPENWEATHER API KEY",
     "units": "metric",
     **location["coord"],
     **params,
