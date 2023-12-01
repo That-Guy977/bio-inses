@@ -4,6 +4,8 @@ Bio-INSES is a prototype tool designed to aid farmers in incorporating [biologic
 
 Tested on Python 3.10, 3.11.
 
+[Screencapture](/simulation/capture.py) is only available on MacOS via [`pyobjc-framework-Quartz`](https://pypi.org/project/pyobjc-framework-Quartz/) and [`screencapture`](https://ss64.com/osx/screencapture.html).
+
 ## Setup
 
 - Clone the repo:
